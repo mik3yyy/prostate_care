@@ -55,6 +55,7 @@ dependencies:
   dialog_alert: ^0.0.3
   speedometer_chart: ^1.0.5
   flutter_slidable: ^3.0.0
+  url_launcher: ^6.2.5
 
 
 

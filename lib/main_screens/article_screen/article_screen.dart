@@ -116,11 +116,13 @@ class _ArticleScreenState extends State<ArticleScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      ViewArticle(article: article)));
+                                  builder: (context) => ViewArticle(
+                                        article: article,
+                                        index: index,
+                                      )));
                         },
                         leading: Hero(
-                          tag: "1",
+                          tag: "$index",
                           child: Image.network(
                             article.image,
                             width: 115,
@@ -145,95 +147,97 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 );
               },
             ),
-            Container(
-              height: 150,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Blogs",
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
-                        // Row(
-                        //   children: [
-                        //     CustomTextButton(
-                        //       text: 'See all',
-                        //       onPressed: widget.toResources,
-                        //     ),
-                        //     Icon(
-                        //       Icons.chevron_right,
-                        //       color: Constants.purple,
-                        //     )
-                        //   ],
-                        // ),
-                      ],
-                    ),
-                  ),
-                  Constants.gap(height: 10),
-                  StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection('blogs')
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return Text('Something went wrong');
-                      }
+            // Container(
+            //   height: 150,
+            //   child: Column(
+            //     children: [
+            //       Padding(
+            //         padding: const EdgeInsets.only(left: 20, right: 20),
+            //         child: Row(
+            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //           children: [
+            //             const Text(
+            //               "Blogs",
+            //               style: TextStyle(
+            //                 fontSize: 18,
+            //               ),
+            //             ),
+            //             // Row(
+            //             //   children: [
+            //             //     CustomTextButton(
+            //             //       text: 'See all',
+            //             //       onPressed: widget.toResources,
+            //             //     ),
+            //             //     Icon(
+            //             //       Icons.chevron_right,
+            //             //       color: Constants.purple,
+            //             //     )
+            //             //   ],
+            //             // ),
+            //           ],
+            //         ),
+            //       ),
+            //       Constants.gap(height: 10),
+            //       StreamBuilder<QuerySnapshot>(
+            //         stream: FirebaseFirestore.instance
+            //             .collection('blogs')
+            //             .snapshots(),
+            //         builder: (context, snapshot) {
+            //           if (snapshot.hasError) {
+            //             return Text('Something went wrong');
+            //           }
 
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
-                      }
+            //           if (snapshot.connectionState == ConnectionState.waiting) {
+            //             return CircularProgressIndicator();
+            //           }
 
-                      List<Blog> blogs = snapshot.data!.docs.map((doc) {
-                        return Blog.fromMap(doc.data() as Map<String, dynamic>);
-                      }).toList();
+            //           List<Blog> blogs = snapshot.data!.docs.map((doc) {
+            //             return Blog.fromMap(doc.data() as Map<String, dynamic>);
+            //           }).toList();
 
-                      return Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: ListView.separated(
-                            separatorBuilder: (context, index) => Divider(),
-                            itemCount: blogs.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              Blog blog = blogs[index];
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ViewBlog(blog: blog)));
-                                },
-                                child: Container(
-                                  width: 116,
-                                  // height: 50,
-                                  child: Hero(
-                                    tag: 'blog',
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.network(
-                                        blog.image,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            )
+            //           return Expanded(
+            //             child: Padding(
+            //               padding: const EdgeInsets.symmetric(horizontal: 20),
+            //               child: ListView.separated(
+            //                 separatorBuilder: (context, index) => Divider(),
+            //                 itemCount: blogs.length,
+            //                 scrollDirection: Axis.horizontal,
+            //                 itemBuilder: (context, index) {
+            //                   Blog blog = blogs[index];
+            //                   return GestureDetector(
+            //                     onTap: () {
+            //                       Navigator.push(
+            //                           context,
+            //                           MaterialPageRoute(
+            //                               builder: (context) =>
+            //                                   ViewBlog(blog: blog)));
+            //                     },
+            //                     child: Container(
+            //                       width: 116,
+            //                       // height: 50,
+            //                       child: Hero(
+            //                         tag: 'blog',
+            //                         child: ClipRRect(
+            //                           borderRadius: BorderRadius.circular(10),
+            //                           child: Image.network(
+            //                             blog.image,
+            //                             fit: BoxFit.cover,
+            //                           ),
+            //                         ),
+            //                       ),
+            //                     ),
+            //                   );
+            //                 },
+            //               ),
+            //             ),
+            //           );
+            //         },
+            //       ),
+
+            //     ],
+
+            //   ),
+            // )
           ],
         ),
       ),

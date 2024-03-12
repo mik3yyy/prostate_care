@@ -51,6 +51,11 @@
 	<string>Allow us to access your Microphone?</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow us to access your photos?</string>
+	<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>sms</string>
+  <string>tel</string>
+</array>
 	
 </dict>
 </plist>

@@ -293,11 +293,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      ViewArticle(article: article)));
+                                  builder: (context) => ViewArticle(
+                                        article: article,
+                                        index: index,
+                                      )));
                         },
                         leading: Hero(
-                          tag: '1',
+                          tag: '$index',
                           child: Image.network(
                             article.image,
                             width: 115,
